@@ -63,7 +63,7 @@ Material:
     - _NoiseAmount: 0.992
     - _NoiseInsideAmount: 0
     - _NoisePower: 5
-    - _NoiseScale: 300
+    - _NoiseScale: 5000
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
@@ -72,7 +72,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 4.1810293, g: 5.3401265, b: 7.9066987, a: 1}
+    - _Color: {r: 3.7842495, g: 1.1266234, b: 0, a: 1}
     - _NoiseSpeed: {r: 0, g: -5, b: 0, a: 0}
     - _NoiseTiling: {r: 0.5, g: 30, b: 0, a: 0}
     - _Speed: {r: 0, g: 3, b: 0, a: 0}
