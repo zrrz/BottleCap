@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    [SerializeField] public Transform endPosition;
 
-    public GameObject prefab;
-    public Transform Holder;
+    public MovingBottle bottlePrefab;
 
     public int spawnCount = 10;
     public float spawnDelay = 1f;
@@ -15,11 +15,6 @@ public class Spawner : MonoBehaviour
     private float numSpawned = 0;
 
     private bool spawning = true;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     private void Update()
     {
@@ -37,6 +32,15 @@ public class Spawner : MonoBehaviour
 
     public void SpawnPrefab()
     {
-        Instantiate(prefab, Holder.position, Holder.rotation);
+        var bottle = Instantiate(bottlePrefab, transform.position, transform.rotation);
+        bottle.SetTargetPosition(endPosition.position);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, 1f);
+        Gizmos.DrawWireSphere(endPosition.position, 1f);
+        Gizmos.DrawLine(transform.position, endPosition.position);
     }
 }
