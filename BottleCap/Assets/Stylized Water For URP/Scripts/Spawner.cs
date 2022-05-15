@@ -38,6 +38,10 @@ public class Spawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
+        if(!endPosition)
+        {
+            return;
+        }
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, 1f);
         Gizmos.DrawWireSphere(endPosition.position, 1f);
