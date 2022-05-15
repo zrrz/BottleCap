@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3018861786828334494
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 6
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ToxicWaterfallShader01
+  m_Shader: {fileID: -6465566751694194690, guid: 5c7958829eb134f42873759f7a79af23,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords:
+  - _EMISSION
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 1
+  m_CustomRenderQueue: -1
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 0
+    - _AmbientOcclusion: 0.177
+    - _AmbientOcclusionNoisePower: 2
+    - _BaseNoiseAmount: 0.15
+    - _Blend: 0
+    - _BlendModePreserveSpecular: 0
+    - _CastShadows: 1
+    - _Cull: 0
+    - _DstBlend: 10
+    - _Float: 0
+    - _Metallic: 0.39
+    - _NormalsNoiseDissolve: 2
+    - _NormalsNoiseScale: 8
+    - _NormalsStrength: 0.12
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Smoothness: 1.45
+    - _Soft_Particle: 2
+    - _SrcBlend: 5
+    - _Surface: 1
+    - _Transparency: 0.6
+    - _TransparencyBaseAmount: 1
+    - _TransperencyMaskAmount: 0
+    - _VoronoiAgitation: 1
+    - _VoronoiAngleOffset: 1
+    - _VoronoiDistortionAmount: 0.075
+    - _VoronoiDistortionScale: 10
+    - _VoronoiPower: 5
+    - _VoronoiScale: 10.66
+    - _WobbleAmount: 0.08
+    - _WobbleFrequency: 4
+    - _WobbleHeight: 1
+    - _WobbleIntensity: 8
+    - _WobbleSpeed: 16
+    - _WorkflowMode: 1
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 1
+    m_Colors:
+    - _BaseColor: {r: 0, g: 0.3421259, b: 1, a: 1}
+    - _Color: {r: 0.2217439, g: 0.95699996, b: 0.14004876, a: 1}
+    - _NormalsNoiseSpeed: {r: 0, g: -0.75, b: 0, a: 0}
+    - _NormalsNoiseTiling: {r: 1, g: 0.9, b: 0, a: 0}
+    - _VoronoiColor: {r: 0.3823592, g: 5.2164745, b: 4.5647235, a: 1}
+    - _VoronoiRemap: {r: 0.05, g: 1, b: 0, a: 0}
+    - _VoronoiSpeed: {r: 0, g: -0.66, b: 0, a: 0}
+    - _VoronoiTiling: {r: 1.2, g: 0.6, b: 0, a: 0}
+  m_BuildTextureStacks: []
