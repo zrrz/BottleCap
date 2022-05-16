@@ -6,12 +6,12 @@ public class MovingBottle : MonoBehaviour
 {
     private Vector3 targetPosition;
     [SerializeField] private float speed = 1f;
-    public AnswerDto answer;
+    public AnswerDto answerData;
 
     public void Initialize(Vector3 position, AnswerDto answerdto)
     {
         targetPosition = position;
-        answer = answerdto;
+        answerData = answerdto;
     }
 
     void Update()

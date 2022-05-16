@@ -6,25 +6,13 @@ public class PlayerPickup : MonoBehaviour
 {
     [SerializeField] private float pickupRadius = 2f;
     public GameObject sign;
-    public AnswerUi anwserui;
-    
 
     void Update()
     {
-        if (anwserui.gameObject.activeSelf == true)
-        {
-            if (Input.GetKeyDown(KeyCode.F))
-            {
-                anwserui.gameObject.SetActive(false);
-            }
-        }
-
         if (Input.GetKeyDown(KeyCode.F))
         {
             GrabNearbyItems();
         }
-
-
     }
 
     private void GrabNearbyItems()
@@ -32,17 +20,17 @@ public class PlayerPickup : MonoBehaviour
         Collider[] cols = Physics.OverlapSphere(transform.position, pickupRadius);
         foreach(Collider col in cols)
         {
-            if(col.GetComponent<MovingBottle>())
+            MovingBottle bottle = col.GetComponent<MovingBottle>();
+            if (bottle != null)
             {
                 Destroy(col.gameObject);
-                string answer = col.GetComponent<MovingBottle>().answer.answer;
-                anwserui.SetText(answer);
+                string answerText = bottle.answerData.answer;
+                string promptText = bottle.answerData.prompt;
+                AnswerUI.Instance.SetText(promptText, answerText);
                 sign.SetActive(false);
-                anwserui.gameObject.SetActive(true);
                 break;
             }
         }
-       
     }
 
     private void OnDrawGizmos()
@@ -60,6 +48,7 @@ public class PlayerPickup : MonoBehaviour
         }
 
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Bottle")

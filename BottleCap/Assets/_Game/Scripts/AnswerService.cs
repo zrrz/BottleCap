@@ -1,29 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class AnswerService : MonoBehaviour
 {
+    public string WEB_URL = "";
+
+    private static AnswerService instance;
+
     public bool useLocalAnswers = true;
     public TextAsset localAnswersFile;
 
-    [SerializeField] private AnswerList answers;
+    private AnswerList answersList;
 
     private List<AnswerDto> unusedAnswers = new List<AnswerDto>();
 
-    void Start()
+    public static bool Ready { get; set; } = false;
+
+    private void Awake()
     {
-        LoadAnswers();
-        unusedAnswers = new List<AnswerDto>(answers.answers);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogError($"Instance of {nameof(AnswerService)} already exists");
+        }
     }
 
-    public AnswerDto GetNewAnswer()
+    void Start()
     {
-        if(unusedAnswers.Count > 0)
+        _ = LoadAnswersAsync();
+    }
+
+    public static AnswerDto GetNewAnswer()
+    {
+        if(instance.unusedAnswers.Count > 0)
         {
-            int index = Random.Range(0, unusedAnswers.Count);
-            AnswerDto newAnswer = unusedAnswers[index];
-            unusedAnswers.RemoveAt(index);
+            int index = Random.Range(0, instance.unusedAnswers.Count);
+            AnswerDto newAnswer = instance.unusedAnswers[index];
+            instance.unusedAnswers.RemoveAt(index);
             return newAnswer;
         }
         else
@@ -33,7 +51,19 @@ public class AnswerService : MonoBehaviour
         }
     }
 
-    public void LoadAnswers()
+    public static void SubmitAnswer(AnswerDto answerDto)
+    {
+        _ = SubmitAnswerAsync(answerDto);
+    }
+
+    public static async Task SubmitAnswerAsync(AnswerDto answerDto)
+    {
+        await RestClient.Instance.PostAsync(instance.WEB_URL, answerDto);
+    }
+
+    
+
+    public async Task LoadAnswersAsync()
     {
         if(useLocalAnswers)
         {
@@ -41,17 +71,25 @@ public class AnswerService : MonoBehaviour
         }
         else
         {
-            LoadAnswersRemote();
+            await LoadAnswersRemoteAsync();
         }
+
+        unusedAnswers = new List<AnswerDto>(answersList.answers);
+        Ready = true;
     }
 
     private void LoadAnswersLocally()
     {
-        answers = Newtonsoft.Json.JsonConvert.DeserializeObject<AnswerList>(localAnswersFile.text);
+        DeserializeAnswers(localAnswersFile.text);
     }
 
-    private void LoadAnswersRemote()
+    private async Task LoadAnswersRemoteAsync()
     {
-        //TODO
+        await RestClient.Instance.GetAsync(WEB_URL, DeserializeAnswers);
+    }
+
+    private void DeserializeAnswers(string jsonData)
+    {
+        answersList = Newtonsoft.Json.JsonConvert.DeserializeObject<AnswerList>(jsonData);
     }
 }

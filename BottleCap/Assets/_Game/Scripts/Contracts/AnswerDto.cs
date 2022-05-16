@@ -7,8 +7,8 @@ public class AnswerDto
 {
     public string prompt;
     public string answer;
-    public string submittedBy;
-    public string dateTime;
+    public string author;
+    public System.DateTime dateTime;
 }
 
 [System.Serializable]

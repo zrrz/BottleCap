@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Prompts
+public class PromptList
 {
     public string[] prompts;
 }

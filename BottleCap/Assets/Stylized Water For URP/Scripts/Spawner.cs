@@ -18,6 +18,10 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
+        if(AnswerService.Ready == false)
+        {
+            return;
+        }
         if (spawning && numSpawned < spawnCount)
         {
             timer += Time.deltaTime;
@@ -32,7 +36,7 @@ public class Spawner : MonoBehaviour
 
     public void SpawnPrefab()
     {
-        AnswerDto newAnswer = FindObjectOfType<AnswerService>().GetNewAnswer();
+        AnswerDto newAnswer = AnswerService.GetNewAnswer();
         var bottle = Instantiate(bottlePrefab, transform.position, transform.rotation);
         bottle.Initialize(endPosition.position, newAnswer);
     }
