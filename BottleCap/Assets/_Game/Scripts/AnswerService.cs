@@ -17,11 +17,6 @@ public class AnswerService : MonoBehaviour
         unusedAnswers = new List<AnswerDto>(answers.answers);
     }
 
-    void Update()
-    {
-        
-    }
-
     public AnswerDto GetNewAnswer()
     {
         if(unusedAnswers.Count > 0)
@@ -29,12 +24,13 @@ public class AnswerService : MonoBehaviour
             int index = Random.Range(0, unusedAnswers.Count);
             AnswerDto newAnswer = unusedAnswers[index];
             unusedAnswers.RemoveAt(index);
+            return newAnswer;
         }
         else
         {
             Debug.LogError("No unused answers");
+            return null;
         }
-        return null;
     }
 
     public void LoadAnswers()
