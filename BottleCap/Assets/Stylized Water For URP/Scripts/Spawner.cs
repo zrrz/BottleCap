@@ -32,8 +32,9 @@ public class Spawner : MonoBehaviour
 
     public void SpawnPrefab()
     {
+        AnswerDto newAnswer = FindObjectOfType<AnswerService>().GetNewAnswer();
         var bottle = Instantiate(bottlePrefab, transform.position, transform.rotation);
-        bottle.SetTargetPosition(endPosition.position);
+        bottle.Initialize(endPosition.position, newAnswer);
     }
 
     private void OnDrawGizmos()

@@ -22,7 +22,7 @@ public class AnswerService : MonoBehaviour
         
     }
 
-    public void GetNewAnswer()
+    public AnswerDto GetNewAnswer()
     {
         if(unusedAnswers.Count > 0)
         {
@@ -34,6 +34,7 @@ public class AnswerService : MonoBehaviour
         {
             Debug.LogError("No unused answers");
         }
+        return null;
     }
 
     public void LoadAnswers()

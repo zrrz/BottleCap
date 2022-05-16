@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlayerPickup : MonoBehaviour
 {
     [SerializeField] private float pickupRadius = 2f;
+    public GameObject sign;
+    public AnswerUi anwserui;
+    
 
     void Update()
     {
@@ -22,6 +25,10 @@ public class PlayerPickup : MonoBehaviour
             if(col.GetComponent<MovingBottle>())
             {
                 Destroy(col.gameObject);
+                string answer = col.GetComponent<MovingBottle>().answer.answer;
+                anwserui.SetText(answer);
+                sign.SetActive(false);
+                anwserui.gameObject.SetActive(true);
                 break;
             }
         }
@@ -31,5 +38,22 @@ public class PlayerPickup : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, pickupRadius);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Bottle")
+        {
+            sign.SetActive(true);
+            Debug.Log("worksign");
+        }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Bottle")
+        {
+            sign.SetActive(false);
+        }
     }
 }
