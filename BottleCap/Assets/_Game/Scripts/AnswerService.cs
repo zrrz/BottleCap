@@ -7,15 +7,14 @@ public class AnswerService : MonoBehaviour
     public bool useLocalAnswers = true;
     public TextAsset localAnswersFile;
 
-    [SerializeField]
-    private AnswerList answers;
+    [SerializeField] private AnswerList answers;
 
-    Queue<AnswerDto> unusedAnswers = new Queue<AnswerDto>();
+    private List<AnswerDto> unusedAnswers = new List<AnswerDto>();
 
     void Start()
     {
         LoadAnswers();
-        unusedAnswers = new Queue<AnswerDto>(answers.answers);
+        unusedAnswers = new List<AnswerDto>(answers.answers);
     }
 
     void Update()
@@ -27,7 +26,9 @@ public class AnswerService : MonoBehaviour
     {
         if(unusedAnswers.Count > 0)
         {
-            AnswerDto newAnswer = unusedAnswers.Dequeue();
+            int index = Random.Range(0, unusedAnswers.Count);
+            AnswerDto newAnswer = unusedAnswers[index];
+            unusedAnswers.RemoveAt(index);
         }
         else
         {
