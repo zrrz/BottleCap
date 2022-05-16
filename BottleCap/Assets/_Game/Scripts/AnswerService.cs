@@ -23,16 +23,18 @@ public class AnswerService : MonoBehaviour
         
     }
 
-    public void GetNewAnswer()
+    public AnswerDto GetNewAnswer()
     {
         if(unusedAnswers.Count > 0)
         {
             AnswerDto newAnswer = unusedAnswers.Dequeue();
+            return newAnswer;
         }
         else
         {
             Debug.LogError("No unused answers");
         }
+        return null;
     }
 
     public void LoadAnswers()
