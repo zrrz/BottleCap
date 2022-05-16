@@ -11,10 +11,20 @@ public class PlayerPickup : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if (anwserui.gameObject.activeSelf == true)
+        {
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                anwserui.gameObject.SetActive(false);
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
         {
             GrabNearbyItems();
         }
+
+
     }
 
     private void GrabNearbyItems()
@@ -32,6 +42,7 @@ public class PlayerPickup : MonoBehaviour
                 break;
             }
         }
+       
     }
 
     private void OnDrawGizmos()
