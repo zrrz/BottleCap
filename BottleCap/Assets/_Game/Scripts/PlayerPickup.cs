@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerPickup : MonoBehaviour
 {
     [SerializeField] private float pickupRadius = 2f;
+    public GameObject sign;
 
     void Update()
     {
@@ -31,5 +32,22 @@ public class PlayerPickup : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, pickupRadius);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            sign.SetActive(true);
+            Debug.Log("worksign");
+        }
+
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            sign.SetActive(false);
+        }
     }
 }
