@@ -6,6 +6,7 @@ public class PlayerPickup : MonoBehaviour
 {
     [SerializeField] private float pickupRadius = 2f;
     public GameObject sign;
+    public GameObject signQ;
 
     void Update()
     {
@@ -46,6 +47,11 @@ public class PlayerPickup : MonoBehaviour
             sign.SetActive(true);
             Debug.Log("worksign");
         }
+        if (other.tag == "Desk")
+        {
+            signQ.SetActive(true);
+            
+        }
 
     }
 
@@ -54,6 +60,11 @@ public class PlayerPickup : MonoBehaviour
         if (other.tag == "Bottle")
         {
             sign.SetActive(false);
+        }
+        if (other.tag == "Desk")
+        {
+            signQ.SetActive(false);
+            
         }
     }
 }
