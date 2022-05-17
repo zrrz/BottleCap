@@ -46,21 +46,13 @@ public class AnswerUI : MonoBehaviour
         startTime = Time.time;
     }
 
-    public void Disable()
-    {
-        if (Time.time > startTime + 3)
-        {
-            answerUi.SetActive(false);
-        }
-        Debug.Log("Delete Message");
-    }
+  
     private void Update()
     {
         if (gameObject.activeSelf == true)
         {
             if (Input.GetKeyDown(KeyCode.F))
-            {
-                //gameObject.SetActive(false);
+            {              
                 animator.SetBool("Close", true);
                 Disable();
             }
@@ -73,5 +65,15 @@ public class AnswerUI : MonoBehaviour
         this.promptText.text = promptText;
         this.answerText.text = answerText;
         gameObject.SetActive(true);
+    }
+
+    public void Disable()
+    {
+        if (Time.time > startTime + 5)
+        {
+            answerUi.SetActive(false);
+            Debug.Log("Delete Message");
+        }
+
     }
 }
