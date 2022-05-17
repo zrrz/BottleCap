@@ -20,6 +20,12 @@ public class Spawner : MonoBehaviour
     {
         if(AnswerService.Ready == false)
         {
+            Debug.Log("not ready");
+            return;
+        }
+        if(AnswerService.AnswerCount <= 0)
+        {
+            Debug.Log("No answers left");
             return;
         }
         if (spawning && numSpawned < spawnCount)

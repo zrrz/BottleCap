@@ -17,6 +17,7 @@ public class AnswerService : MonoBehaviour
     private List<AnswerDto> unusedAnswers = new List<AnswerDto>();
 
     public static bool Ready { get; set; } = false;
+    public static int AnswerCount => instance.unusedAnswers.Count;
 
     private void Awake()
     {
@@ -32,8 +33,13 @@ public class AnswerService : MonoBehaviour
 
     void Start()
     {
-        _ = LoadAnswersAsync();
+        LoadAnswersAsync();
     }
+
+    //private void OnGUI()
+    //{
+    //    if(GUILayout.Button(""))
+    //}
 
     public static AnswerDto GetNewAnswer()
     {
@@ -53,17 +59,15 @@ public class AnswerService : MonoBehaviour
 
     public static void SubmitAnswer(AnswerDto answerDto)
     {
-        _ = SubmitAnswerAsync(answerDto);
+        SubmitAnswerAsync(answerDto);
     }
 
-    public static async Task SubmitAnswerAsync(AnswerDto answerDto)
+    public static async void SubmitAnswerAsync(AnswerDto answerDto)
     {
         await RestClient.Instance.PostAsync(instance.WEB_URL, answerDto);
     }
 
-    
-
-    public async Task LoadAnswersAsync()
+    public async void LoadAnswersAsync()
     {
         if(useLocalAnswers)
         {
@@ -91,5 +95,6 @@ public class AnswerService : MonoBehaviour
     private void DeserializeAnswers(string jsonData)
     {
         answersList = Newtonsoft.Json.JsonConvert.DeserializeObject<AnswerList>(jsonData);
+        unusedAnswers = new List<AnswerDto>(answersList.answers);
     }
 }

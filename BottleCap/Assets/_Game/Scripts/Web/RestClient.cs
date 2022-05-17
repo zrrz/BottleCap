@@ -23,8 +23,8 @@ public class RestClient : MonoBehaviour
 
     public async Task GetAsync(string url, System.Action<string> deserializeCallback)
     {
-        await _Get(url);
-        deserializeCallback.Invoke(url);
+        string json = await _Get(url);
+        deserializeCallback.Invoke(json);
     }
 
     private async Task<string> _Get(string url)
