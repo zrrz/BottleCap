@@ -9,10 +9,16 @@ public class AnswerUI : MonoBehaviour
 
     public TextMeshProUGUI promptText;
     public TextMeshProUGUI answerText;
+    public GameObject answerUi;
+    Animator animator;
+    float startTime;
+
+
+
 
     [SerializeField] private UnityEngine.UI.Button closeButton;
 
-
+    
     private void Awake()
     {
         if (Instance == null)
@@ -29,16 +35,36 @@ public class AnswerUI : MonoBehaviour
     {
         gameObject.SetActive(false);
         closeButton.onClick.AddListener(()=> { gameObject.SetActive(false); });
+
+        animator = gameObject.gameObject.GetComponent<Animator>();
+
+        
+
+    }
+    void OnEnable()
+    {
+        startTime = Time.time;
     }
 
+    public void Disable()
+    {
+        if (Time.time > startTime + 3)
+        {
+            answerUi.SetActive(false);
+        }
+        Debug.Log("Delete Message");
+    }
     private void Update()
     {
         if (gameObject.activeSelf == true)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
+                animator.SetBool("Close", true);
+                Disable();
             }
+
         }
     }
 
