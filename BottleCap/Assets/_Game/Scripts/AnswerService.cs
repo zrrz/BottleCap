@@ -64,7 +64,8 @@ public class AnswerService : MonoBehaviour
 
     public static async void SubmitAnswerAsync(AnswerDto answerDto)
     {
-        await RestClient.Instance.PostAsync(instance.WEB_URL, answerDto);
+        string json = await RestClient.Instance.PostAsync(instance.WEB_URL, answerDto);
+        instance.DeserializeAnswers(json);
     }
 
     public async void LoadAnswersAsync()

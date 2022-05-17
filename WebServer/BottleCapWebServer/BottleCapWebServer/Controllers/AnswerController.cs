@@ -35,6 +35,26 @@ namespace BottleCapWebServer.Controllers
             return data;
         }
 
+        [HttpGet]
+        [Route("Answer/GetRandom")]
+        public string GetRandom()
+        {
+            //TODO dont get message u are the author of
+            var random = new System.Random();
+            int index = random.Next(Answers.answers.Count);
+            string data = Newtonsoft.Json.JsonConvert.SerializeObject(Answers);
+            return data;
+        }
+
+        [HttpGet]
+        public string GetMessagesFromAuthor(string author)
+        {
+            //TODO dont get message u are the author of
+            string data = Newtonsoft.Json.JsonConvert.SerializeObject(Answers);
+            return data;
+        }
+
+
         [HttpPost]
         public string Post([FromBody] AnswerDto newAnswer)
         {

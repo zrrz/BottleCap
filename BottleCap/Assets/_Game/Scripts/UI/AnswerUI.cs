@@ -10,6 +10,9 @@ public class AnswerUI : MonoBehaviour
     public TextMeshProUGUI promptText;
     public TextMeshProUGUI answerText;
 
+    [SerializeField] private UnityEngine.UI.Button closeButton;
+
+
     private void Awake()
     {
         if (Instance == null)
@@ -25,6 +28,7 @@ public class AnswerUI : MonoBehaviour
     private void Start()
     {
         gameObject.SetActive(false);
+        closeButton.onClick.AddListener(()=> { gameObject.SetActive(false); });
     }
 
     private void Update()
