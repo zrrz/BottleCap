@@ -11,7 +11,7 @@ public class AnswerUI : MonoBehaviour
     public TextMeshProUGUI answerText;
     public GameObject answerUi;
     Animator animator;
-    float startTime;
+    public AudioSource m_MyAudioSource;
 
 
 
@@ -38,23 +38,33 @@ public class AnswerUI : MonoBehaviour
 
         animator = gameObject.gameObject.GetComponent<Animator>();
 
-        
+        m_MyAudioSource = GetComponent<AudioSource>();
 
     }
-    void OnEnable()
+
+    public IEnumerator PlayAnimWaitAndDisable(string animName, float waitTime)
     {
-        startTime = Time.time;
+        animator.SetBool("Close", true);
+        yield return new WaitForSeconds(waitTime);
+        gameObject.SetActive(false);
     }
 
-  
+    IEnumerator playSoundAfterTenSeconds()
+    {
+        yield return new WaitForSeconds(1);
+        m_MyAudioSource.Play();
+    }
+
     private void Update()
     {
         if (gameObject.activeSelf == true)
         {
             if (Input.GetKeyDown(KeyCode.F))
-            {              
-                animator.SetBool("Close", true);
-                Disable();
+            {
+                //animator.SetBool("Close", true);
+                StartCoroutine(PlayAnimWaitAndDisable("Open", 2f));
+                StartCoroutine(playSoundAfterTenSeconds());
+
             }
 
         }
@@ -67,13 +77,5 @@ public class AnswerUI : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-    public void Disable()
-    {
-        if (Time.time > startTime + 5)
-        {
-            answerUi.SetActive(false);
-            Debug.Log("Delete Message");
-        }
-
-    }
+   
 }
