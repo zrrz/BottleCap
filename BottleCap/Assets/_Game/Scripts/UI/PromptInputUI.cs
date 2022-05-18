@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PromptInputUI : MonoBehaviour
+public class PromptInputUI : GenericPageUI
 {
     public static PromptInputUI Instance;
 
@@ -34,10 +34,11 @@ public class PromptInputUI : MonoBehaviour
         submitButton.onClick.AddListener(SubmitPrompt);
     }
 
-    public void SetText(string promptText)
+    public void Open(string promptText)
     {
+        Open();
+
         this.promptText.text = promptText;
-        gameObject.SetActive(true);
         answerField.text = "";
         answerField.Select();
         answerField.ActivateInputField();
@@ -45,18 +46,19 @@ public class PromptInputUI : MonoBehaviour
 
     public void Cancel()
     {
-        gameObject.SetActive(false);
+        Close();
     }
 
     public void SubmitPrompt()
     {
-        AnswerService.SubmitAnswer(new AnswerDto
+        var newAnswer = new AnswerDto
         {
             prompt = promptText.text,
             answer = answerField.text,
-            author = "zrrz",
+            author = System.Environment.UserName,
             dateTime = System.DateTime.Now
-        });
-        gameObject.SetActive(false);
+        };
+        AnswerService.SubmitAnswer(newAnswer);
+        Close();
     }
 }

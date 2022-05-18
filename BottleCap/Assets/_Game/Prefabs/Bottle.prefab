@@ -33,7 +33,7 @@ Transform:
   - {fileID: 7142090857423967846}
   - {fileID: 73441866}
   m_Father: {fileID: 0}
-  m_RootOrder: 38
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5243163924414409334
 MonoBehaviour:
@@ -48,11 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  answer:
+  answerData:
     prompt: 
     answer: 
-    submittedBy: 
-    dateTime: 
+    author: 
 --- !u!135 &8727891555506088614
 SphereCollider:
   m_ObjectHideFlags: 0

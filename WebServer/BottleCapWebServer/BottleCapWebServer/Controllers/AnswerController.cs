@@ -8,65 +8,85 @@ namespace BottleCapWebServer.Controllers
     [Route("[controller]")]
     public class AnswerController : ControllerBase
     {
-        public static AnswerList Answers = new AnswerList
-        {
-            answers = new List<AnswerDto>
-            {
-                new AnswerDto
-                {
-                    Prompt = "Do you work?",
-                    Answer = "Yes I do",
-                    Author = "zrrz"
-                }
-            }
-        };
+        //public static AnswerList Answers = new AnswerList
+        //{
+        //    answers = new List<AnswerDto>
+        //    {
+        //        new AnswerDto
+        //        {
+        //            Prompt = "Do you work?",
+        //            Answer = "Yes I do",
+        //            Author = "zrrz"
+        //        }
+        //    }
+        //};
 
         private readonly ILogger<AnswerController> _logger;
+
+        private Database database;
 
         public AnswerController(ILogger<AnswerController> logger)
         {
             _logger = logger;
+            database = new Database();
         }
 
         [HttpGet]
-        public string Get()
+        public IActionResult Get()
         {
-            string data = Newtonsoft.Json.JsonConvert.SerializeObject(Answers);
-            return data;
+            //var al = new AnswerList
+            //{
+            //    answers = new List<AnswerDto>
+            //{
+            //    new AnswerDto
+            //    {
+            //        Prompt = "Do you work?",
+            //        Answer = "Yes I do",
+            //        Author = "zrrz"
+            //    }
+            //}
+            //};
+            var answers = database.GetRandomAnswers(10);
+            string data = Newtonsoft.Json.JsonConvert.SerializeObject(answers);
+            //_logger.LogInformation(data);
+            return Ok(data);
         }
 
-        [HttpGet]
-        [Route("Answer/GetRandom")]
-        public string GetRandom()
-        {
-            //TODO dont get message u are the author of
-            var random = new System.Random();
-            int index = random.Next(Answers.answers.Count);
-            string data = Newtonsoft.Json.JsonConvert.SerializeObject(Answers);
-            return data;
-        }
+        //[HttpGet]
+        //[Route("Answer/GetRandom")]
+        //public string GetRandom()
+        //{
+        //    //TODO dont get message u are the author of
+        //    var random = new System.Random();
+        //    int index = random.Next(Answers.answers.Count);
+        //    string data = Newtonsoft.Json.JsonConvert.SerializeObject(Answers);
+        //    return data;
+        //}
 
         [HttpGet]
+        [Route("answer/author")]
         public string GetMessagesFromAuthor(string author)
         {
             //TODO dont get message u are the author of
-            string data = Newtonsoft.Json.JsonConvert.SerializeObject(Answers);
+            var answers = database.GetAnswerByAuthor(author);
+            string data = Newtonsoft.Json.JsonConvert.SerializeObject(answers);
             return data;
         }
 
 
         [HttpPost]
-        public string Post([FromBody] AnswerDto newAnswer)
+        public IActionResult Post([FromBody] AnswerDto newAnswer)
         {
             if(newAnswer == null)
             {
                 _logger.LogError("newAnswer is null");
-                return "";
+                //return "";
             }
-            Answers.answers.Add(newAnswer);
+            database.AddAnswer(newAnswer);
             _logger.LogInformation("Adding: " + newAnswer);
-            string data = Newtonsoft.Json.JsonConvert.SerializeObject(Answers);
-            return data;
+            return Ok();
+            //string data = Newtonsoft.Json.JsonConvert.SerializeObject(Answers);
+            //return data;
         }
     }
 }

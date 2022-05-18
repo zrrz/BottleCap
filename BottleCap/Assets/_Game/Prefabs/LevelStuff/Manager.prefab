@@ -46,7 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 137aeb40fd8440146ba685349e7e7eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LOCAL_URL: https://localhost:5001/answer
   WEB_URL: http://18.218.91.1:5001/answer
+  useRemoteUrl: 1
   useLocalAnswers: 0
   localAnswersFile: {fileID: 4900000, guid: d8c1ea8019076cf439217f26e60dfe7d, type: 3}
 --- !u!114 &9192886707177433675

@@ -2,25 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnswerWritingTable : MonoBehaviour
+public class AnswerWritingTable : Interactable
 {
-    //TODO rewrite pickup logic to more generic interact logic. Have 'f' pickup active table and open writing prompt
-
-    void Start()
+    public void OpenWritingPrompt()
     {
-        
+        PromptSelectUI.Instance.Open();
     }
 
-    void Update()
+    public override void Interact(PlayerData playerData)
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(!PromptSelectUI.Instance.gameObject.activeSelf)
         {
             OpenWritingPrompt();
         }
-    }
-
-    public void OpenWritingPrompt()
-    {
-        PromptSelectUI.Instance.gameObject.SetActive(true);
     }
 }

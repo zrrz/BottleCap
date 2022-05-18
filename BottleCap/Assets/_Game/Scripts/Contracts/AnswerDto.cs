@@ -10,9 +10,3 @@ public class AnswerDto
     public string author;
     public System.DateTime dateTime;
 }
-
-[System.Serializable]
-public class AnswerList
-{
-    public List<AnswerDto> answers;
-}

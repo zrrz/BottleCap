@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class PromptSelectUI : MonoBehaviour
+public class PromptSelectUI : GenericPageUI
 {
     public static PromptSelectUI Instance;
 
@@ -46,12 +46,12 @@ public class PromptSelectUI : MonoBehaviour
 
     public void Cancel()
     {
-        gameObject.SetActive(false);
+        Close();
     }
 
     public void SelectPrompt(string prompt)
     {
-        promptInputUI.SetText(prompt);
-        gameObject.SetActive(false);
+        promptInputUI.Open(prompt);
+        Close();
     }
 }

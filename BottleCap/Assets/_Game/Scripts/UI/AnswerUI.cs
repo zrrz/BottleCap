@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class AnswerUI : MonoBehaviour
+public class AnswerUI : GenericPageUI
 {
     public static AnswerUI Instance;
 
@@ -13,12 +13,11 @@ public class AnswerUI : MonoBehaviour
     Animator animator;
     public AudioSource m_MyAudioSource;
 
-
-
-
     [SerializeField] private UnityEngine.UI.Button closeButton;
+    [SerializeField] private AudioClip openSound;
+    [SerializeField] private AudioClip closeSound;
+    private bool opening;
 
-    
     private void Awake()
     {
         if (Instance == null)
@@ -39,43 +38,59 @@ public class AnswerUI : MonoBehaviour
         animator = gameObject.gameObject.GetComponent<Animator>();
 
         m_MyAudioSource = GetComponent<AudioSource>();
-
-    }
-
-    public IEnumerator PlayAnimWaitAndDisable(string animName, float waitTime)
-    {
-        animator.SetBool("Close", true);
-        yield return new WaitForSeconds(waitTime);
-        gameObject.SetActive(false);
-    }
-
-    IEnumerator playSoundAfterTenSeconds()
-    {
-        yield return new WaitForSeconds(1);
-        m_MyAudioSource.Play();
     }
 
     private void Update()
     {
         if (gameObject.activeSelf == true)
         {
-            if (Input.GetKeyDown(KeyCode.F))
+            //HACK to make sure you dont close it until its done opening to prevent quick double tap
+            if (Input.GetKeyDown(KeyCode.F) && !opening)
             {
-                //animator.SetBool("Close", true);
-                StartCoroutine(PlayAnimWaitAndDisable("Open", 2f));
-                StartCoroutine(playSoundAfterTenSeconds());
-
+                AnimateClosePage();
             }
-
         }
+    }
+
+    private void AnimateOpenPage()
+    {
+        opening = true;
+        StartCoroutine(PlayAnimWaitAndInvoke("AnswerUiOpen", 1f, ()=> { opening = false; }));
+        StartCoroutine(PlayDelayedSound(openSound, 0f));
+    }
+
+    private void AnimateClosePage()
+    {
+        PlayerData.ReleaseInputLock();
+        StartCoroutine(PlayAnimWaitAndInvoke("AnswerUiClose", 1f, ()=> { gameObject.SetActive(false); }));
+        StartCoroutine(PlayDelayedSound(closeSound, 0f));
+    }
+
+    public IEnumerator PlayAnimWaitAndInvoke(string animName, float waitTime, System.Action invokeEvent)
+    {
+        animator.Play(animName);
+        animator.SetBool("Close", true);
+        if(invokeEvent != null)
+        {
+            yield return new WaitForSeconds(waitTime);
+            invokeEvent.Invoke();
+        }
+    }
+
+    IEnumerator PlayDelayedSound(AudioClip sound, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        m_MyAudioSource.clip = sound;
+        m_MyAudioSource.Play();
     }
 
     public void SetText(string promptText, string answerText)
     {
+        Open();
+
         this.promptText.text = promptText;
         this.answerText.text = answerText;
-        gameObject.SetActive(true);
-    }
 
-   
+        AnimateOpenPage();
+    }
 }

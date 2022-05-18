@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class PlayerPickup : MonoBehaviour
 {
+    private PlayerData playerData;
+
     [SerializeField] private float pickupRadius = 2f;
     public GameObject sign;
     public GameObject signQ;
 
+    private void Awake()
+    {
+        playerData = GetComponent<PlayerData>();
+    }
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (!PlayerData.InputLocked && Input.GetKeyDown(KeyCode.F))
         {
-            GrabNearbyItems();
+            InteractNearby();
         }
     }
 
-    private void GrabNearbyItems()
+    private void InteractNearby()
     {
-        Collider[] cols = Physics.OverlapSphere(transform.position, pickupRadius);
+        Vector3 center = transform.position + transform.forward;
+        Collider[] cols = Physics.OverlapSphere(center, pickupRadius);
         foreach(Collider col in cols)
         {
-            MovingBottle bottle = col.GetComponent<MovingBottle>();
-            if (bottle != null)
+            Interactable interactable = col.GetComponent<Interactable>();
+            if (interactable != null)
             {
-                Destroy(col.gameObject);
-                string answerText = bottle.answerData.answer;
-                string promptText = bottle.answerData.prompt;
-                AnswerUI.Instance.SetText(promptText, answerText);
+                interactable.Interact(playerData);
                 sign.SetActive(false);
                 break;
             }
@@ -37,7 +42,8 @@ public class PlayerPickup : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, pickupRadius);
+        Vector3 center = transform.position + transform.forward;
+        Gizmos.DrawWireSphere(center, pickupRadius);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,14 +51,11 @@ public class PlayerPickup : MonoBehaviour
         if (other.tag == "Bottle")
         {
             sign.SetActive(true);
-            Debug.Log("worksign");
         }
         if (other.tag == "Desk")
         {
             signQ.SetActive(true);
-            
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -64,7 +67,6 @@ public class PlayerPickup : MonoBehaviour
         if (other.tag == "Desk")
         {
             signQ.SetActive(false);
-            
         }
     }
 }
