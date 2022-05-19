@@ -45,7 +45,7 @@ public class AnswerUI : GenericPageUI
         if (gameObject.activeSelf == true)
         {
             //HACK to make sure you dont close it until its done opening to prevent quick double tap
-            if (Input.GetKeyDown(KeyCode.F) && !opening)
+            if (Input.GetKeyDown(KeyCode.F))
             {
                 AnimateClosePage();
             }
@@ -61,8 +61,11 @@ public class AnswerUI : GenericPageUI
 
     private void AnimateClosePage()
     {
-        PlayerData.ReleaseInputLock();
-        StartCoroutine(PlayAnimWaitAndInvoke("AnswerUiClose", 1f, ()=> { gameObject.SetActive(false); }));
+        
+        StartCoroutine(PlayAnimWaitAndInvoke("AnswerUiClose", 1f, ()=> { 
+            PlayerData.ReleaseInputLock(); 
+            gameObject.SetActive(false);
+        }));
         StartCoroutine(PlayDelayedSound(closeSound, 0f));
     }
 

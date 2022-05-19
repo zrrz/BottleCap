@@ -52,7 +52,7 @@ public class RestClient : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             string jsonResult = request.downloadHandler.text;
-            Debug.Log(jsonResult);
+            //Debug.Log(jsonResult);
             return jsonResult;
         }
         else

@@ -27,7 +27,7 @@ public class BottleSpawnManager : MonoBehaviour
     {
         if (AnswerService.Ready == false)
         {
-            Debug.Log("not ready");
+            //Debug.Log("not ready");
             return;
         }
 
