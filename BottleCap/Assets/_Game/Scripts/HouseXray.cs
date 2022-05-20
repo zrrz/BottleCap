@@ -25,7 +25,6 @@ public class HouseXray : MonoBehaviour
         {
             roof.GetComponent<MeshRenderer>().material = xray;
             roof1.GetComponent<MeshRenderer>().material = xray;
-            Debug.Log("work");
         }
     }
 

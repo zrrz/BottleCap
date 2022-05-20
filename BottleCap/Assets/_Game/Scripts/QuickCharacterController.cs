@@ -19,7 +19,7 @@ public class QuickCharacterController : MonoBehaviour
         if (!PlayerData.InputLocked)
         {
             Vector3 inputDir = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-            if(inputDir.sqrMagnitude > 0f)
+            if(inputDir.sqrMagnitude > 0.05f)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(inputDir), turnSpeed * Time.deltaTime);
             }
