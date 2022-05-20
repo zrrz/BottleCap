@@ -1333,7 +1333,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupRadius: 1.2
   sign: {fileID: 7079646736602985340}
-  signQ: {fileID: 7755614001295271180}
+  interactLayer:
+    serializedVersion: 2
+    m_Bits: 2147483647
 --- !u!114 &240438798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11754,7 +11756,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.77758, y: 1}
+    m_SensorSize: {x: 1.7772357, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -15179,12 +15181,6 @@ PrefabInstance:
 --- !u!4 &7755614001295271176 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5242377537300359080, guid: 4362353d7069dc2438bb682d2356a0ac,
-    type: 3}
-  m_PrefabInstance: {fileID: 2549551202790949536}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &7755614001295271180 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5242377537300359084, guid: 4362353d7069dc2438bb682d2356a0ac,
     type: 3}
   m_PrefabInstance: {fileID: 2549551202790949536}
   m_PrefabAsset: {fileID: 0}

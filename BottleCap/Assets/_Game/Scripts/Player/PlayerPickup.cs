@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerPickup : MonoBehaviour
@@ -7,8 +8,12 @@ public class PlayerPickup : MonoBehaviour
     private PlayerData playerData;
 
     [SerializeField] private float pickupRadius = 2f;
-    public GameObject sign;
-    public GameObject signQ;
+    [SerializeField] private GameObject sign;
+    //[SerializeField] private GameObject signQ;
+
+    [SerializeField] private LayerMask interactLayer;
+
+    private int nearbyInteractables = 0;
 
     private void Awake()
     {
@@ -17,26 +22,51 @@ public class PlayerPickup : MonoBehaviour
 
     void Update()
     {
-        if (!PlayerData.InputLocked && Input.GetKeyDown(KeyCode.F))
-        {
-            InteractNearby();
-        }
+        InteractNearby();     
     }
 
     private void InteractNearby()
     {
         Vector3 center = transform.position + transform.forward;
-        Collider[] cols = Physics.OverlapSphere(center, pickupRadius);
-        foreach(Collider col in cols)
+        Collider[] cols = Physics.OverlapSphere(center, pickupRadius, interactLayer);
+
+        bool interactableNear = false;
+        foreach (Collider col in cols)
         {
             Interactable interactable = col.GetComponent<Interactable>();
             if (interactable != null)
             {
-                interactable.Interact(playerData);
-                sign.SetActive(false);
+                if (!PlayerData.InputLocked && Input.GetKeyDown(KeyCode.F))
+                {
+                    interactable.Interact(playerData);
+                }
+                interactableNear = true;
+                ShowInteractSign(interactable);
                 break;
             }
         }
+        if(sign.activeSelf && !interactableNear)
+        {
+            sign.SetActive(false);
+        }
+    }
+
+    private void ShowInteractSign(Interactable interactable)
+    {
+        string interactText = "To interact!";
+        switch (interactable)
+        {
+            case MovingBottle movingBottle:
+                interactText = "To Pick up";
+                break;
+            case AnswerWritingTable table:
+                interactText = "To Write about yourself";
+                break;
+            default:
+                break;
+        }
+        sign.SetActive(true);
+        //sign.GetComponentInChildren<UnityEngine.UI.Text>().text = interactText;
     }
 
     private void OnDrawGizmos()
@@ -44,29 +74,5 @@ public class PlayerPickup : MonoBehaviour
         Gizmos.color = Color.green;
         Vector3 center = transform.position + transform.forward;
         Gizmos.DrawWireSphere(center, pickupRadius);
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Bottle")
-        {
-            sign.SetActive(true);
-        }
-        if (other.tag == "Desk")
-        {
-            signQ.SetActive(true);
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Bottle")
-        {
-            sign.SetActive(false);
-        }
-        if (other.tag == "Desk")
-        {
-            signQ.SetActive(false);
-        }
     }
 }

@@ -1668,7 +1668,7 @@ MonoBehaviour:
   isTrigger: 0
   physicsMaterial: {fileID: 0}
   copyTag: 0
-  onlyWhenSelected: 0
+  onlyWhenSelected: 1
   GizmoLineInterval: 0.5
   GizmoColor: {r: 0, g: 1, b: 0, a: 1}
   DEBUG: 0

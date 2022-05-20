@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingBottle : Interactable
 {
     [SerializeField] private float speed = 1f;
-    public AnswerDto answerData;
+    private AnswerDto answerData;
 
     private Vector3 targetPosition;
 
