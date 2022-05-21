@@ -9,7 +9,8 @@ public class PetWaitState : PetBaseState
     float minWaitTime = 4f;
     float maxWaitTime = 10f;
 
-    public PetWaitState(NavMeshAgent agent, PetAIController petAiController) : base(agent, petAiController) { }
+    public PetWaitState(NavMeshAgent agent, Animator animator, PetAIController petAiController) 
+        : base(agent, animator, petAiController) { }
 
     public override void EnterState()
     {
@@ -28,6 +29,8 @@ public class PetWaitState : PetBaseState
         {
             petAiController.ChooseRandomState();
         }
+
+        animator.SetFloat("MoveSpeed", 0f);
 
         //base.UpdateState();
     }

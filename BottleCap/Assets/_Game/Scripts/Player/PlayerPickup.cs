@@ -22,7 +22,17 @@ public class PlayerPickup : MonoBehaviour
 
     void Update()
     {
-        InteractNearby();     
+        if(!playerData.IsHoldingMessage)
+        {
+            InteractNearby();     
+        }
+        else
+        {
+            if (sign.activeSelf)
+            {
+                sign.SetActive(false);
+            }
+        }
     }
 
     private void InteractNearby()
@@ -36,7 +46,7 @@ public class PlayerPickup : MonoBehaviour
             Interactable interactable = col.GetComponent<Interactable>();
             if (interactable != null)
             {
-                if (!PlayerData.InputLocked && Input.GetKeyDown(KeyCode.F))
+                if (Input.GetKeyDown(KeyCode.F) && !PlayerData.InputLocked)
                 {
                     interactable.Interact(playerData);
                 }

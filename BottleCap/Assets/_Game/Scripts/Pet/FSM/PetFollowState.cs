@@ -11,7 +11,8 @@ public class PetFollowState : PetBaseState
     float minFollowTime = 5f;
     float maxFollowTime = 15f;
 
-    public PetFollowState(NavMeshAgent agent, PetAIController petAiController) : base(agent, petAiController) { }
+    public PetFollowState(NavMeshAgent agent, Animator animator, PetAIController petAiController) 
+        : base(agent, animator, petAiController) { }
 
     public override void EnterState()
     {
@@ -31,6 +32,10 @@ public class PetFollowState : PetBaseState
         if (Vector3.Distance(navMeshAgent.transform.position, Target.position) > 3f)
         {
              base.UpdateState();
+        }
+        else
+        {
+            animator.SetFloat("MoveSpeed", 0f);
         }
 
         followTimer -= Time.deltaTime;

@@ -40,10 +40,10 @@ namespace BottleCapWebServer
                 List<AnswerDto> results = new List<AnswerDto>();
 
                 var rnd = new Random();
-                for(int i = 0; i < count; i++)
+                //for(int i = 0; i < count; i++)
                 {
                     var offset = rnd.Next(0, collection.Count());
-                    var result = collection.Query().Limit(1).Offset(offset).SingleOrDefault();
+                    var result = collection.Query().Limit(10).Offset(offset).SingleOrDefault();
                     results.Add(result);
                 }
 

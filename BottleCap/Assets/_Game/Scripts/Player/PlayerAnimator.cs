@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Animator animator;
+    [SerializeField] private GameObject bottle;
+
+    private void Start()
     {
-        
+        SetHoldingBottle(false);   
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayPickup()
     {
-        
+        animator.SetTrigger("PickupBottle");
+    }
+
+    public void PlayThrow()
+    {
+        animator.SetTrigger("ThrowBottle");
+    }
+
+    public void SetHoldingBottle(bool holding)
+    {
+        bottle.SetActive(holding);
+        animator.SetLayerWeight(animator.GetLayerIndex("HoldBottleLayer"), holding ? 1f : 0f);
     }
 }

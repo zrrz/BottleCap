@@ -58,7 +58,9 @@ public class PromptInputUI : GenericPageUI
             author = System.Environment.UserName,
             dateTime = System.DateTime.Now
         };
-        AnswerService.SubmitAnswer(newAnswer);
+        //AnswerService.SubmitAnswer(newAnswer);
+  
+        PlayerData.Instance.SetHeldMessage(newAnswer);
         Close();
     }
 }

@@ -7,7 +7,8 @@ public class PetWanderState : PetBaseState
 {
     //public Vector3 Destination { get; private set; }
 
-    public PetWanderState(NavMeshAgent agent, PetAIController petAiController) : base(agent, petAiController) { }
+    public PetWanderState(NavMeshAgent agent, Animator animator, PetAIController petAiController) 
+        : base(agent, animator, petAiController) { }
 
     public override void EnterState()
     {
@@ -23,7 +24,7 @@ public class PetWanderState : PetBaseState
     {
         navMeshAgent.SetDestination(destination);
 
-        if (Vector3.Distance(navMeshAgent.transform.position, destination) < 0.1f)
+        if (Vector3.Distance(navMeshAgent.transform.position, destination) < 0.14f)
         {
             //petAiController.ChooseRandomState();
             petAiController.SetState(PetAIController.State.Wait);
@@ -41,7 +42,6 @@ public class PetWanderState : PetBaseState
         if (NavMesh.SamplePosition(randomPos, out hit, radius, 1))
         {
             destination = hit.position;
-            Debug.LogWarning("new dest: " + destination);
         }
         else
         {

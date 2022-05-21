@@ -25,6 +25,16 @@ public class MovingBottle : Interactable
 
     public override void Interact(PlayerData playerData)
     {
+        playerData.PlayerAnimator.PlayPickup();
+
+        StartCoroutine(OpenPageAfterDelay(1f));
+    }
+
+    IEnumerator OpenPageAfterDelay(float delay)
+    {
+        GetComponent<Collider>().enabled = false;
+        PlayerData.AddInputLock();
+        yield return new WaitForSeconds(delay);
         string answerText = answerData.answer;
         string promptText = answerData.prompt;
         AnswerUI.Instance.SetText(promptText, answerText);

@@ -33,7 +33,7 @@ public class AnswerUI : GenericPageUI
     private void Start()
     {
         gameObject.SetActive(false);
-        closeButton.onClick.AddListener(()=> { gameObject.SetActive(false); });
+        closeButton.onClick.AddListener(()=> { AnimateClosePage(); });
 
         animator = gameObject.gameObject.GetComponent<Animator>();
 
@@ -62,7 +62,7 @@ public class AnswerUI : GenericPageUI
     private void AnimateClosePage()
     {
         
-        StartCoroutine(PlayAnimWaitAndInvoke("AnswerUiClose", 1f, ()=> { 
+        StartCoroutine(PlayAnimWaitAndInvoke("AnswerUiClose", 0.6f, ()=> { 
             PlayerData.ReleaseInputLock(); 
             gameObject.SetActive(false);
         }));
@@ -89,11 +89,12 @@ public class AnswerUI : GenericPageUI
 
     public void SetText(string promptText, string answerText)
     {
-        Open();
+        //Open();
 
         this.promptText.text = promptText;
         this.answerText.text = answerText;
 
+        gameObject.SetActive(true);
         AnimateOpenPage();
-    }
+    } 
 }

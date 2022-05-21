@@ -8,16 +8,37 @@ public abstract class PetBaseState : FSMState
     protected NavMeshAgent navMeshAgent;
     protected PetAIController petAiController;
     protected Vector3 destination;
+    protected Animator animator;
 
-    public PetBaseState(NavMeshAgent navMeshAgent, PetAIController petAiController)
+    protected float minMoveSpeed = 2.5f;
+    protected float maxMoveSpeed = 4f;
+
+    public PetBaseState(NavMeshAgent navMeshAgent, Animator animator, PetAIController petAiController)
     {
         this.navMeshAgent = navMeshAgent;
         this.petAiController = petAiController;
+        this.animator = animator;
     }
 
     public override void UpdateState()
     {
+        animator.SetFloat("MoveSpeed", 1f);
+
         MoveTowardsDestination();
+    }
+
+    public override void LateUpdateState()
+    {
+        //TiltHead();
+    }
+
+    protected void TiltHead()
+    {
+        Transform head = petAiController.transform.GetChild(0).Find("Armature/Hip1/Spine1/Spine2/Spine3/Neck/Head");
+        Transform player = GameObject.FindObjectOfType<PlayerData>().transform;
+
+        Vector3 direction = player.position + Vector3.up - head.position;
+        head.LookAt(direction, -head.forward);
     }
 
     protected void MoveTowardsDestination()
@@ -57,5 +78,26 @@ public abstract class PetBaseState : FSMState
         //}
         
         navMeshAgent.Move(transform.forward * Time.deltaTime * navMeshAgent.speed);
+
+        Transform visObject = transform.GetChild(0);
+
+        //Tilt to slope
+        if(Physics.Raycast(visObject.position, Vector3.down, out RaycastHit hit))
+        {
+            Debug.DrawLine(visObject.position, hit.point, Color.red);
+
+            Quaternion newRot = Quaternion.FromToRotation(visObject.up, hit.normal)
+            * visObject.rotation;
+
+            float slopeRotChangeSpeed = 4f;
+
+            //Apply the rotation 
+            visObject.rotation = Quaternion.Lerp(visObject.rotation, newRot,
+                Time.deltaTime * slopeRotChangeSpeed);
+
+            Vector3 angles = visObject.localEulerAngles;
+            angles.y = 0f;
+            visObject.localEulerAngles = angles;
+        }
     }
 }
