@@ -5,6 +5,7 @@ using UnityEngine;
 public class BottleSpawnManager : MonoBehaviour
 {
     [SerializeField] private MovingBottle bottlePrefab;
+    [SerializeField] private GameObject[] bottleArtPrefabs;
     [SerializeField] private BottleSpawnHolder[] bottleSpawns;
 
     [SerializeField]  private float minBottleSpawnFrequency = 2f;
@@ -55,6 +56,7 @@ public class BottleSpawnManager : MonoBehaviour
         Vector3 endPosition = bottleSpawn.endPosition.position;
         availableBottleSpawns.RemoveAt(randIndex);
         var bottle = Instantiate(bottlePrefab, bottleSpawn.transform.position, bottleSpawn.transform.rotation);
+        Instantiate(bottleArtPrefabs.RandomItem(), bottle.transform.GetChild(0));
         bottle.Initialize(endPosition, newAnswer, ()=>
         {
             availableBottleSpawns.Add(bottleSpawn);

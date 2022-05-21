@@ -14,7 +14,6 @@ public class PetWaitState : PetBaseState
     public override void EnterState()
     {
         waitTimer = Random.Range(minWaitTime, maxWaitTime);
-        Debug.Log("Waiting for: " + waitTimer);
     }
 
     public override void ExitState()
