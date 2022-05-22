@@ -62,8 +62,8 @@ Material:
     - _FresnelPower: 2
     - _NoiseAmount: 0.992
     - _NoiseInsideAmount: 0
-    - _NoisePower: 5
-    - _NoiseScale: 5000
+    - _NoisePower: 15
+    - _NoiseScale: 10000
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
