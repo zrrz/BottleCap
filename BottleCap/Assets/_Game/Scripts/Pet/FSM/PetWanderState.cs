@@ -46,7 +46,7 @@ public class PetWanderState : PetBaseState
         }
         else
         {
-            Debug.LogError("Hit nothing");
+            //Debug.LogError("Hit nothing");
         }
     }
 }
