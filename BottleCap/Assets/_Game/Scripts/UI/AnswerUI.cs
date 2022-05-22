@@ -66,6 +66,7 @@ public class AnswerUI : GenericPageUI
         StartCoroutine(PlayAnimWaitAndInvoke("AnswerUiClose", 0.6f, ()=> { 
             PlayerData.ReleaseInputLock(); 
             gameObject.SetActive(false);
+            TutorialManager.Instance.TriggerEventCompleted(TutorialManager.TutorialSection.FindFirstBottle);
         }));
         StartCoroutine(PlayDelayedSound(closeSound, 0f));
     }

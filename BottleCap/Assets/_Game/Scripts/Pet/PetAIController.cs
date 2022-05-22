@@ -43,6 +43,17 @@ public class PetAIController : MonoBehaviour
     void Update()
     {
         GetState(currentState).UpdateState();
+
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            CallDogOver();
+        }
+    }
+
+    public void CallDogOver()
+    {
+        SetState(State.Follow);
+        //TODO whistle sound
     }
 
     private void LateUpdate()

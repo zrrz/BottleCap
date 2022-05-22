@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    [SerializeField] private DialogueUI dialogueUI;
-
     public static DialogueManager Instance { get; internal set; }
 
     private void Awake()
@@ -21,8 +19,7 @@ public class DialogueManager : MonoBehaviour
     }
 
     public void ShowText(string text)
-    {
-        dialogueUI.gameObject.SetActive(true);
-        dialogueUI.SetText(text);
+    {   
+        DialogueUI.SetText(text);
     }
 }

@@ -16,7 +16,7 @@ public class UserManager : MonoBehaviour
 
     public static string GetUserName()
     {
-        string username = "Anonymous";
+        string username = "Anonymoos";
         if (HasUsernameSaved)
         {
             username = PlayerPrefs.GetString(usernameKey);

@@ -8,8 +8,19 @@ public class DialogueUI : MonoBehaviour
 
     [SerializeField] private UnityEngine.UI.Button closeButton;
 
+    private static DialogueUI instance;
+
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Debug.LogError($"Instance of {nameof(DialogueUI)} already exists");
+        }
+
         closeButton.onClick.AddListener(CloseText);
         gameObject.SetActive(false);
     }
@@ -22,19 +33,21 @@ public class DialogueUI : MonoBehaviour
         }
     }
 
-    public void SetText(string text)
+    public static void SetText(string text)
     {
+        instance.gameObject.SetActive(true);
         PlayerData.AddInputLock();
-        dialogueText.text = text;
-        StartCoroutine(AnimateScale(Vector3.one * 0.01f, Vector3.one, 0.5f, null));
+        instance.dialogueText.text = text;
+        instance.StartCoroutine(instance.AnimateScale(Vector3.one * 0.01f, Vector3.one, 0.5f, null));
     }
 
-    public void CloseText()
+    public static void CloseText()
     {
         PlayerData.ReleaseInputLock();
-        StartCoroutine(AnimateScale(Vector3.one, Vector3.one * 0.01f, 0.5f, () =>
+        instance.StartCoroutine(instance.AnimateScale(Vector3.one, Vector3.one * 0.01f, 0.5f, () =>
         {
-            gameObject.SetActive(false);
+            instance.gameObject.SetActive(false);
+            TutorialManager.Instance.ShowObjectText();
         }
         ));
     }

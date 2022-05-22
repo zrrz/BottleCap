@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +18,8 @@ public class TutorialManager : MonoBehaviour
 
         public bool shouldDoDialogue = false;
         public string dialogueText = "";
+        public bool shouldDoObjective = false;
+        public string objectiveText = "";
 
         public void TryComplete()
         {
@@ -27,6 +28,7 @@ public class TutorialManager : MonoBehaviour
                 OnCompleted.Invoke();
                 completed = true;
                 manager.SetSection(nextSection);
+                ObjectiveUI.SetObjective("");
             }
         }
 
@@ -39,9 +41,23 @@ public class TutorialManager : MonoBehaviour
                 if(shouldDoDialogue)
                 {
                     DialogueManager.Instance.ShowText(dialogueText);
-                }
+                } 
             }
         }
+
+        public void ShowObjectiveText()
+        {
+            if (shouldDoObjective)
+            {
+                ObjectiveUI.SetObjective(objectiveText);
+            }
+        }
+    }
+
+    public void ShowObjectText()
+    {
+        var moment = momentMap[currentSection];
+        moment.ShowObjectiveText();
     }
 
     private void SetSection(TutorialSection nextSection)

@@ -135,6 +135,7 @@ MonoBehaviour:
   playerData: {fileID: 6018444396190983733}
   throwingBottlePrefab: {fileID: 4836940728783413307, guid: 42aa238e4836b6844b2cb52918bbda2b,
     type: 3}
+  throwingLocked: 0
 --- !u!1 &6018444396434941386
 GameObject:
   m_ObjectHideFlags: 0
@@ -238,8 +239,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6018444396878451679}
-  m_LocalRotation: {x: 0.46766266, y: 1e-45, z: -0, w: 0.8839071}
-  m_LocalPosition: {x: 0, y: 7.672, z: -3.9399986}
+  m_LocalRotation: {x: -0.08080608, y: -0.8706125, z: 0.46062845, w: -0.15272781}
+  m_LocalPosition: {x: -1.3410847, y: 7.672, z: 3.7047424}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -422,7 +423,7 @@ GameObject:
   - component: {fileID: 6018444397643413021}
   - component: {fileID: 6018444397643413020}
   m_Layer: 6
-  m_Name: Capsule
+  m_Name: GrassMoverCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -13,8 +13,9 @@ public class PromptInputUI : GenericPageUI
 
     [SerializeField] private UnityEngine.UI.Button cancelButton;
     [SerializeField] private UnityEngine.UI.Button submitButton;
+    [SerializeField] private UnityEngine.UI.Button signatureButton;
 
-    //TODO only submit if response was written
+    private bool signed = false;
 
     private void Awake()
     {
@@ -33,7 +34,17 @@ public class PromptInputUI : GenericPageUI
         gameObject.SetActive(false);
         cancelButton.onClick.AddListener(Cancel);
         submitButton.onClick.AddListener(SubmitPrompt);
+        signatureButton.onClick.AddListener(SignSignature);
         CheckCharacterCount("");
+    }
+
+    private void SignSignature()
+    {
+        signatureButton.interactable = false;
+        signatureButton.GetComponentInChildren<TextMeshProUGUI>().text = UserManager.GetUserName();
+        signatureButton.GetComponent<UnityEngine.UI.Image>().enabled = false;
+        signed = true;
+        CheckCharacterCount(answerField.text);
     }
 
     public void Open(string promptText)
@@ -49,7 +60,7 @@ public class PromptInputUI : GenericPageUI
 
     private void CheckCharacterCount(string text)
     {
-        submitButton.interactable = text.Length >= 2;
+        submitButton.interactable = text.Length >= 2 && signed;
     }
 
     public void Cancel()

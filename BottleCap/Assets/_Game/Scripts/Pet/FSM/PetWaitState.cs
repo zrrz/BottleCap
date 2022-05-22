@@ -19,13 +19,11 @@ public class PetWaitState : PetBaseState
 
     public override void ExitState()
     {
-        Debug.Log("sitting off");
         animator.SetBool("Sitting", false);
     }
 
     public override void UpdateState()
     {
-        Debug.Log("sitting on");
         animator.SetFloat("MoveSpeed", 0f);
         animator.SetBool("Sitting", true);
 

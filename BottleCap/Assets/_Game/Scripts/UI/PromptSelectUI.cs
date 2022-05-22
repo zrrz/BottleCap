@@ -28,11 +28,24 @@ public class PromptSelectUI : GenericPageUI
 
     private void Start()
     {
+        AddRandomPrompt();
         var promptList = PromptService.GetPromptList();
         PopulatePrompts(promptList);
         gameObject.SetActive(false);
 
+        //contentHolder.sizeDelta
+
         cancelButton.onClick.AddListener(Cancel);
+    }
+
+    private void AddRandomPrompt()
+    {
+        var option = Instantiate(promptOptionPrefab, contentHolder);
+        option.Initialize("Random", (str)=>
+        {
+            string randomPrompt = PromptService.GetPromptList().prompts.RandomItem();
+            SelectPrompt(randomPrompt);
+        });
     }
 
     public void PopulatePrompts(PromptList prompts)
