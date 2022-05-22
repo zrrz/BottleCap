@@ -26,12 +26,29 @@ public class DialogueUI : MonoBehaviour
     {
         PlayerData.AddInputLock();
         dialogueText.text = text;
+        StartCoroutine(AnimateScale(Vector3.one * 0.01f, Vector3.one, 0.5f, null));
     }
 
     public void CloseText()
     {
-        //TODO shrink and grow box
         PlayerData.ReleaseInputLock();
-        gameObject.SetActive(false);
+        StartCoroutine(AnimateScale(Vector3.one, Vector3.one * 0.01f, 0.5f, () =>
+        {
+            gameObject.SetActive(false);
+        }
+        ));
+    }
+
+    public IEnumerator AnimateScale(Vector3 startSize, Vector3 endSize, float time, System.Action OnComplete)
+    {
+        for(float t = 0; t <= 1f; t += Time.deltaTime/time)
+        {
+            transform.localScale = Vector3.Lerp(startSize, endSize, t);
+            yield return null;
+        }
+        if(OnComplete != null)
+        {
+            OnComplete.Invoke();
+        }
     }
 }

@@ -9,6 +9,7 @@ public class AnswerUI : GenericPageUI
 
     public TextMeshProUGUI promptText;
     public TextMeshProUGUI answerText;
+    public TextMeshProUGUI authorText;
     public GameObject answerUi;
     Animator animator;
     public AudioSource m_MyAudioSource;
@@ -87,12 +88,13 @@ public class AnswerUI : GenericPageUI
         m_MyAudioSource.Play();
     }
 
-    public void SetText(string promptText, string answerText)
+    public void SetText(string promptText, string answerText, string authorText)
     {
         //Open();
 
         this.promptText.text = promptText;
         this.answerText.text = answerText;
+        this.authorText.text = authorText;
 
         gameObject.SetActive(true);
         AnimateOpenPage();

@@ -31,6 +31,7 @@ public class Door : MonoBehaviour
 
     public void CloseInstant()
     {
+        targetRot = closeRot;
         transform.localRotation = Quaternion.Euler(closeRot);
     }
 }

@@ -55,7 +55,9 @@ public class TutorialManager : MonoBehaviour
     public enum TutorialSection
     {
         House,
-        ThrowBottleOnBeach
+        GetToBeach,
+        ThrowFirstBottle,
+        FindFirstBottle
     }
 
     public TutorialMoment[] moments;

@@ -67,6 +67,8 @@ public class ThrowingBottle : MonoBehaviour
         StartCoroutine(PlaySinkAndFloat(sink));
         StartCoroutine(Cleanup(25f));
         Destroy(rb);
+
+        TutorialManager.Instance.TriggerEventCompleted(TutorialManager.TutorialSection.ThrowFirstBottle);
     }
 
     private IEnumerator PlaySinkAndFloat(bool sink)

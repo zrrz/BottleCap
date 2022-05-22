@@ -13,9 +13,11 @@ public class PlayerBottleHolder : MonoBehaviour
 
     [SerializeField] ThrowingBottle throwingBottlePrefab;
 
+    public bool throwingLocked = false;
+
     void Update()
     {
-        if (IsHoldingMessage)
+        if (IsHoldingMessage && !throwingLocked)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {
@@ -26,9 +28,12 @@ public class PlayerBottleHolder : MonoBehaviour
 
     private IEnumerator ThrowBottleAsync()
     {
+        var message = heldMessage;
+        heldMessage = null;
+
         playerData.PlayerAnimator.PlayThrow();
         yield return new WaitForSeconds(0.7f);
-        AnswerService.SubmitAnswer(heldMessage);
+        AnswerService.SubmitAnswer(message);
         SetHeldMessage(null);
         Vector3 spawnPosition = playerData.PlayerAnimator.HoldingBottleTransform.position;
         Quaternion spawnRotation = playerData.PlayerAnimator.HoldingBottleTransform.rotation;
@@ -40,5 +45,15 @@ public class PlayerBottleHolder : MonoBehaviour
     {
         this.heldMessage = heldMessage;
         playerData.PlayerAnimator.SetHoldingBottle(heldMessage != null);
+    }
+
+    public void LockThrowing()
+    {
+        throwingLocked = true;
+    }
+
+    public void UnlockThrowing()
+    {
+        throwingLocked = false;
     }
 }

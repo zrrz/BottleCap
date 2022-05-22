@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class PromptInputUI : GenericPageUI
 {
@@ -32,6 +33,7 @@ public class PromptInputUI : GenericPageUI
         gameObject.SetActive(false);
         cancelButton.onClick.AddListener(Cancel);
         submitButton.onClick.AddListener(SubmitPrompt);
+        CheckCharacterCount("");
     }
 
     public void Open(string promptText)
@@ -42,6 +44,12 @@ public class PromptInputUI : GenericPageUI
         answerField.text = "";
         answerField.Select();
         answerField.ActivateInputField();
+        answerField.onValueChanged.AddListener(CheckCharacterCount);
+    }
+
+    private void CheckCharacterCount(string text)
+    {
+        submitButton.interactable = text.Length >= 2;
     }
 
     public void Cancel()
@@ -55,10 +63,9 @@ public class PromptInputUI : GenericPageUI
         {
             prompt = promptText.text,
             answer = answerField.text,
-            author = System.Environment.UserName,
+            author = UserManager.GetUserName(),
             dateTime = System.DateTime.Now
         };
-        //AnswerService.SubmitAnswer(newAnswer);
 
         TutorialManager.Instance.TriggerEventCompleted(TutorialManager.TutorialSection.House);
 

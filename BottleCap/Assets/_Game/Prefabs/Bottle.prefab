@@ -47,10 +47,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
-  answerData:
-    prompt: 
-    answer: 
-    author: 
 --- !u!65 &2887392327780607944
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -81,6 +77,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259595692234994936, guid: a4f65faf94dcc6b469e94c2cba5b4104,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.7360031
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259595692234994936, guid: a4f65faf94dcc6b469e94c2cba5b4104,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.7360031
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259595692234994936, guid: a4f65faf94dcc6b469e94c2cba5b4104,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.7360031
       objectReference: {fileID: 0}
     - target: {fileID: 1259595692234994936, guid: a4f65faf94dcc6b469e94c2cba5b4104,
         type: 3}
@@ -140,26 +151,6 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: a4f65faf94dcc6b469e94c2cba5b4104, type: 3}
---- !u!1 &3303776320122374825 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6899067538071136311, guid: a4f65faf94dcc6b469e94c2cba5b4104,
-    type: 3}
-  m_PrefabInstance: {fileID: 8243617362735358622}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &567733362707559597
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3303776320122374825}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6121590469811200223, guid: 218b07e3b60c8cc4999b242005a20a9b, type: 3}
 --- !u!4 &7142090857423967846 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1259595692234994936, guid: a4f65faf94dcc6b469e94c2cba5b4104,

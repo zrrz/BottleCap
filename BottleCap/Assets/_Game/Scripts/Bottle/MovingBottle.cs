@@ -37,7 +37,8 @@ public class MovingBottle : Interactable
         yield return new WaitForSeconds(delay);
         string answerText = answerData.answer;
         string promptText = answerData.prompt;
-        AnswerUI.Instance.SetText(promptText, answerText);
+        string authorText = answerData.author;
+        AnswerUI.Instance.SetText(promptText, answerText, authorText);
         FreeBottleSpawnEvent.Invoke();
         Destroy(gameObject);
     }
