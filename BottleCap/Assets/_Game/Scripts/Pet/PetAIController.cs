@@ -60,7 +60,7 @@ public class PetAIController : MonoBehaviour
     public void SetState(State newState)
     {
         GetState(currentState).ExitState();
-        print($"new state: {newState}");
+        //print($"new state: {newState}");
         currentState = newState;
 
         GetState(newState).EnterState();

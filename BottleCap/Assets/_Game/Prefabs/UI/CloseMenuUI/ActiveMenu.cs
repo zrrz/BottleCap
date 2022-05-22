@@ -4,24 +4,20 @@ using UnityEngine;
 
 public class ActiveMenu : MonoBehaviour
 {
-    public GameObject Menu;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public ButtonText Menu;
+   
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Menu.SetActive(!Menu.activeSelf);
+            if(!Menu.gameObject.activeSelf)
+            {
+                Menu.Open();
+            }
+            else
+            {
+                Menu.TaskOnClickResume();
+            }
         }
-        
-       
-       
     }
-
-
 }

@@ -27,14 +27,6 @@ public class PlayerData : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            ResetInputLock();
-        }
-    }
-
     public static bool InputLocked => inputLockedCount > 0;
 
     private static int inputLockedCount = 0;
@@ -42,11 +34,13 @@ public class PlayerData : MonoBehaviour
     public static void AddInputLock()
     {
         inputLockedCount++;
+        //print("add: " + inputLockedCount);
     }
 
     public static void ReleaseInputLock()
     {
         inputLockedCount = Mathf.Max(0, inputLockedCount - 1);
+        //print("release: " + inputLockedCount);
     }
 
     public static void ResetInputLock()

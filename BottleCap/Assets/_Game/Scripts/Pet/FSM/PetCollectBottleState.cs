@@ -111,7 +111,6 @@ public class PetCollectBottleState : PetBaseState
 
     private void HandleWatchingState()
     {
-        Debug.Log("watchTimer: " + watchTimer);
         watchTimer -= Time.deltaTime;
         if(watchTimer >= 0f)
         {

@@ -59,7 +59,9 @@ public class PromptInputUI : GenericPageUI
             dateTime = System.DateTime.Now
         };
         //AnswerService.SubmitAnswer(newAnswer);
-  
+
+        TutorialManager.Instance.TriggerEventCompleted(TutorialManager.TutorialSection.House);
+
         PlayerData.Instance.PlayerBottleHolder.SetHeldMessage(newAnswer);
         Close();
     }

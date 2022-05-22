@@ -6,41 +6,38 @@ using UnityEngine.UI;
 
 public class ButtonText : MonoBehaviour
 {
-    // Start is called before the first frame update
     public GameObject Menu;
     public Button Resumebutton;
+    public Button Restartbutton;
     public Button Quitbutton;
 
     void Start()
     {
-        Button btn = Resumebutton.GetComponent<Button>();
-        btn.onClick.AddListener(TaskOnClickResume);
-
-        Button quitbtn = Quitbutton.GetComponent<Button>();
-        quitbtn.onClick.AddListener(TaskOnClickQuit);
+        Resumebutton.onClick.AddListener(TaskOnClickResume);
+        Restartbutton.onClick.AddListener(TaskOnClickRestart);
+        Quitbutton.onClick.AddListener(TaskOnClickQuit);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Open()
     {
-       
-    }
+        gameObject.SetActive(true);
+        PlayerData.AddInputLock();
+    }    
 
-    void TaskOnClickResume()
+    public void TaskOnClickResume()
     {
-        Menu.SetActive(!Menu.activeSelf);
-        Debug.Log("Reset");
+        PlayerData.ReleaseInputLock();
+        Menu.SetActive(false);
     }
 
-    //void TaskOnClickReset()
-    //{
-    //    CharacterControl.JumpCounter.text = "0";
-    //    Debug.Log("Reset");
-    //}
+    public void TaskOnClickRestart()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        PlayerData.ResetInputLock();
+    }
 
-    void TaskOnClickQuit()
+    public void TaskOnClickQuit()
     {
         Application.Quit();
-        Debug.Log("Reset");
     }
 }
