@@ -76,7 +76,7 @@ public class PlayerPickup : MonoBehaviour
                 break;
         }
         sign.SetActive(true);
-        //sign.GetComponentInChildren<UnityEngine.UI.Text>().text = interactText;
+        sign.GetComponentInChildren<TMPro.TextMeshProUGUI>().text = interactText;
     }
 
     private void OnDrawGizmos()

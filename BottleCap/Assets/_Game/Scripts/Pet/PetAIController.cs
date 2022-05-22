@@ -52,6 +52,10 @@ public class PetAIController : MonoBehaviour
 
     public void CallDogOver()
     {
+        if(currentState == State.CollectBottle)
+        {
+            return;
+        }
         SetState(State.Follow);
         //TODO whistle sound
     }

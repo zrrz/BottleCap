@@ -68,7 +68,16 @@ public class AnswerService : MonoBehaviour
 
     public static void SubmitAnswer(AnswerDto answerDto)
     {
-        SubmitAnswerAsync(answerDto);
+        string result = "";
+        if (AnswerMessageParser.CheckIsMessageOk(answerDto, out result))
+        {
+            SubmitAnswerAsync(answerDto);
+        }
+        else
+        {
+            Debug.Log($"Message didn't pass safety checks: reason:\n {result}");
+        }
+
     }
 
     public static async void SubmitAnswerAsync(AnswerDto answerDto)

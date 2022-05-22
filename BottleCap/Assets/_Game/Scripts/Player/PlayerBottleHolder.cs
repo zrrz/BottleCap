@@ -17,7 +17,7 @@ public class PlayerBottleHolder : MonoBehaviour
 
     void Update()
     {
-        if (IsHoldingMessage && !throwingLocked)
+        if (IsHoldingMessage && !throwingLocked && !PlayerData.InputLocked)
         {
             if (Input.GetKeyDown(KeyCode.F))
             {

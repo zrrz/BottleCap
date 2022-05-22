@@ -12,6 +12,8 @@ public class MainMenuUI : MonoBehaviour
 
     void Start()
     {
+        UnityEngine.Rendering.DebugManager.instance.enableRuntimeUI = false;
+
         playButton.onClick.AddListener(() =>
         {
             string name = nameInputField.text;
@@ -28,6 +30,10 @@ public class MainMenuUI : MonoBehaviour
             Application.Quit();
         });
 
+        if(UserManager.HasUsernameSaved)
+        {
+            nameInputField.text = UserManager.GetUserName();
+        }
         nameInputField.Select();
         nameInputField.ActivateInputField();
     }

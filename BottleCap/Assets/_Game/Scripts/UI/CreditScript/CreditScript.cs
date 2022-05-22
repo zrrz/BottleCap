@@ -22,6 +22,6 @@ public class CreditScript : MonoBehaviour
 
     void TaskOnClick()
     {
-        credits.SetActive(true);
+        credits.SetActive(!credits.activeSelf);
     }
 }
