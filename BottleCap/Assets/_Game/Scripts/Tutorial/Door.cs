@@ -14,8 +14,8 @@ public class Door : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = Quaternion.RotateTowards(
-            Quaternion.Euler(transform.eulerAngles), Quaternion.Euler(targetRot), 
+        transform.localRotation = Quaternion.RotateTowards(
+            Quaternion.Euler(transform.localEulerAngles), Quaternion.Euler(targetRot), 
             rotateSpeed * Time.deltaTime);
     }
 
@@ -31,6 +31,6 @@ public class Door : MonoBehaviour
 
     public void CloseInstant()
     {
-        transform.rotation = Quaternion.Euler(closeRot);
+        transform.localRotation = Quaternion.Euler(closeRot);
     }
 }
