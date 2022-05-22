@@ -7,6 +7,8 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject bottle;
 
+    public Transform HoldingBottleTransform => bottle.transform;
+
     private void Start()
     {
         SetHoldingBottle(false);   

@@ -60,7 +60,7 @@ public class PromptInputUI : GenericPageUI
         };
         //AnswerService.SubmitAnswer(newAnswer);
   
-        PlayerData.Instance.SetHeldMessage(newAnswer);
+        PlayerData.Instance.PlayerBottleHolder.SetHeldMessage(newAnswer);
         Close();
     }
 }

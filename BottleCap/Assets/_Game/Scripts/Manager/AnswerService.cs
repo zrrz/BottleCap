@@ -6,7 +6,7 @@ using UnityEngine;
 public class AnswerService : MonoBehaviour
 {
     public string LOCAL_URL = "https://18.218.91.1:5001/answer";
-    public string WEB_URL = "http://18.218.91.1:5001/answer";
+    public string WEB_URL = "http://18.223.69.65:5001/answer";
     public bool useRemoteUrl = true;
 
     private static AnswerService instance;
@@ -98,7 +98,8 @@ public class AnswerService : MonoBehaviour
 
     private async Task LoadAnswersRemoteAsync()
     {
-        await RestClient.Instance.GetAsync(WEB_URL, DeserializeAnswers);
+        string url = instance.useRemoteUrl ? instance.WEB_URL : instance.LOCAL_URL;
+        await RestClient.Instance.GetAsync(url, DeserializeAnswers);
     }
 
     private void DeserializeAnswers(string jsonData)
