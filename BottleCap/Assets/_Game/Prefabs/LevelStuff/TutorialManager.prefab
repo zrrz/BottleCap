@@ -438,7 +438,7 @@ MonoBehaviour:
             m_BoolArgument: 1
           m_CallState: 2
     shouldDoDialogue: 1
-    dialogueText: That was a nice sleep... Time to write a letter!
+    dialogueText: That was a nice sleep... I feel like writing a letter.
     shouldDoObjective: 1
     objectiveText: Write a letter
   - section: 1
@@ -525,8 +525,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls: []
     shouldDoDialogue: 1
-    dialogueText: 'Now I just press ''F'' to toss the bottle into the ocean! Don''t
-      worry though: if I miss my dog will get it for me!'
+    dialogueText: Now I just press 'F' to toss the bottle into the ocean!
     shouldDoObjective: 1
     objectiveText: Throw your bottle!
   - section: 3
