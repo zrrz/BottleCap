@@ -12,13 +12,18 @@ public class PetAIController : MonoBehaviour
 
     public enum State
     {
-        Wander, Follow, Wait
+        Wander, Follow, Wait, CollectBottle
     }
 
     [SerializeField] private State currentState;
 
+    private List<ThrowingBottle> bottlesToPickup = new List<ThrowingBottle>();
+    [SerializeField] private GameObject bottleVisual;
+
     void Start()
     {
+        SetBottleVisuals(false);
+
         var petFollowState = new PetFollowState(agent, animator, this);
         petFollowState.Target = FindObjectOfType<PlayerData>().transform;
         stateMap.Add(State.Follow, petFollowState);
@@ -28,6 +33,9 @@ public class PetAIController : MonoBehaviour
 
         var petWaitState = new PetWaitState(agent, animator, this);
         stateMap.Add(State.Wait, petWaitState);
+
+        var petCollectBottleState = new PetCollectBottleState(bottlesToPickup, agent, animator, this);
+        stateMap.Add(State.CollectBottle, petCollectBottleState);
 
         SetState(State.Wander);
     }
@@ -45,14 +53,14 @@ public class PetAIController : MonoBehaviour
     public void ChooseRandomState()
     {
         var newState = (State)Random.Range(0, System.Enum.GetValues(typeof(State)).Length);
-        //print($"new random state: {newState}");
+        
         SetState(newState);
     }
 
     public void SetState(State newState)
     {
         GetState(currentState).ExitState();
-
+        print($"new state: {newState}");
         currentState = newState;
 
         GetState(newState).EnterState();
@@ -61,6 +69,15 @@ public class PetAIController : MonoBehaviour
     public void SetFollowTarget()
     {
         SetState(State.Follow);
+    }
+
+    public void SetBottleTarget(ThrowingBottle bottle)
+    {
+        bottlesToPickup.Add(bottle);
+        if(currentState != State.CollectBottle)
+        {
+            SetState(State.CollectBottle);
+        }
     }
 
     private PetBaseState GetState(State state)
@@ -74,5 +91,10 @@ public class PetAIController : MonoBehaviour
             Debug.LogError($"No State {state}");
             return null;
         }
+    }
+
+    public void SetBottleVisuals(bool active)
+    {
+        bottleVisual.SetActive(active);
     }
 }

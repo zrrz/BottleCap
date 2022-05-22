@@ -22,7 +22,8 @@ public abstract class PetBaseState : FSMState
 
     public override void UpdateState()
     {
-        animator.SetFloat("MoveSpeed", 1f);
+        float animSpeed = Mathf.InverseLerp(minMoveSpeed, maxMoveSpeed, navMeshAgent.speed);
+        animator.SetFloat("MoveSpeed", 1f + animSpeed);
 
         MoveTowardsDestination();
     }
@@ -32,14 +33,14 @@ public abstract class PetBaseState : FSMState
         //TiltHead();
     }
 
-    protected void TiltHead()
-    {
-        Transform head = petAiController.transform.GetChild(0).Find("Armature/Hip1/Spine1/Spine2/Spine3/Neck/Head");
-        Transform player = GameObject.FindObjectOfType<PlayerData>().transform;
+    //protected void TiltHead()
+    //{
+    //    Transform head = petAiController.transform.GetChild(0).Find("Armature/Hip1/Spine1/Spine2/Spine3/Neck/Head");
+    //    Transform player = GameObject.FindObjectOfType<PlayerData>().transform;
 
-        Vector3 direction = player.position + Vector3.up - head.position;
-        head.LookAt(direction, -head.forward);
-    }
+    //    Vector3 direction = player.position + Vector3.up - head.position;
+    //    head.LookAt(direction, -head.forward);
+    //}
 
     protected void MoveTowardsDestination()
     {
@@ -99,5 +100,10 @@ public abstract class PetBaseState : FSMState
             angles.y = 0f;
             visObject.localEulerAngles = angles;
         }
+    }
+    
+    protected void SetMoveSpeed(float moveSpeed)
+    {
+        navMeshAgent.speed = moveSpeed;
     }
 }

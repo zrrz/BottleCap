@@ -6,17 +6,16 @@ public class PlayerData : MonoBehaviour
 {
     public PlayerAnimator PlayerAnimator { get; private set; }
     public PlayerPickup PlayerPickup { get; private set; }
+    public PlayerBottleHolder PlayerBottleHolder { get; private set; }
 
     public static PlayerData Instance;
-
-    private AnswerDto heldMessage = null;
-
-    public bool IsHoldingMessage => heldMessage != null;
 
     private void Awake()
     {
         PlayerAnimator = GetComponent<PlayerAnimator>();
         PlayerPickup = GetComponent<PlayerPickup>();
+        PlayerBottleHolder = GetComponent<PlayerBottleHolder>();
+        PlayerBottleHolder.playerData = this;
 
         if (Instance == null)
         {
@@ -33,16 +32,6 @@ public class PlayerData : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             ResetInputLock();
-        }
-
-        if(IsHoldingMessage)
-        {
-            if(Input.GetKeyDown(KeyCode.F))
-            {
-                PlayerAnimator.PlayThrow();
-                AnswerService.SubmitAnswer(heldMessage);
-                SetHeldMessage(null);
-            }
         }
     }
 
@@ -63,11 +52,5 @@ public class PlayerData : MonoBehaviour
     public static void ResetInputLock()
     {
         inputLockedCount = 0;
-    }
-
-    public void SetHeldMessage(AnswerDto heldMessage)
-    {
-        this.heldMessage = heldMessage;
-        PlayerAnimator.SetHoldingBottle(heldMessage != null);
-    }
+    }  
 }

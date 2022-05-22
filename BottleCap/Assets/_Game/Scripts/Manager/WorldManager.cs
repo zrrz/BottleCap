@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class WorldManager : MonoBehaviour
     private static WorldManager instance;
 
     [SerializeField] private float radius = 50f;
+    [SerializeField] private Transform dropOffPoint;
 
     private void Awake()
     {
@@ -28,6 +30,11 @@ public class WorldManager : MonoBehaviour
     public static float GetWorldRadius()
     {
         return instance.radius;
+    }
+
+    public static Transform GetBottleDropOffPoint()
+    {
+        return instance.dropOffPoint;
     }
 
     private void OnDrawGizmosSelected()

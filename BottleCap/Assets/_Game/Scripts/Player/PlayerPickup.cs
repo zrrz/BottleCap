@@ -22,7 +22,7 @@ public class PlayerPickup : MonoBehaviour
 
     void Update()
     {
-        if(!playerData.IsHoldingMessage)
+        if(!playerData.PlayerBottleHolder.IsHoldingMessage)
         {
             InteractNearby();     
         }

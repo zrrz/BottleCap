@@ -12,6 +12,7 @@ public class PetWanderState : PetBaseState
 
     public override void EnterState()
     {
+        SetMoveSpeed(minMoveSpeed);
         ChooseNewDestination();
     }
 

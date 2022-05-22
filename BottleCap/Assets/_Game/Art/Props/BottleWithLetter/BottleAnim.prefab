@@ -30,8 +30,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -4.927321, y: -0.1575703, z: -13.132435}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!111 &1090856927102661242
 Animation:
   m_ObjectHideFlags: 0
@@ -43,7 +43,6 @@ Animation:
   serializedVersion: 3
   m_Animation: {fileID: 7400000, guid: d01ab7fe6d9b9624ab7a223a9a510ff7, type: 2}
   m_Animations:
-  - {fileID: 0}
   - {fileID: 7400000, guid: d01ab7fe6d9b9624ab7a223a9a510ff7, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
