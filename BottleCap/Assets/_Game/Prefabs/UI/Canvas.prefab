@@ -5264,7 +5264,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Signature
+  m_text: 'Click to sign!
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e4ee4479983a48548bd09e93aed543fd, type: 2}
   m_sharedMaterial: {fileID: -7846926079445775623, guid: e4ee4479983a48548bd09e93aed543fd,
