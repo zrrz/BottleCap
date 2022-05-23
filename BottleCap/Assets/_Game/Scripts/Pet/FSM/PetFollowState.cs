@@ -16,7 +16,8 @@ public class PetFollowState : PetBaseState
 
     public override void EnterState()
     {
-        SetMoveSpeed(Random.Range(minMoveSpeed, maxMoveSpeed));
+        //SetMoveSpeed(Random.Range(minMoveSpeed, maxMoveSpeed));
+        SetMoveSpeed(maxMoveSpeed);
         followTimer = Random.Range(minFollowTime, maxFollowTime);
     }
 

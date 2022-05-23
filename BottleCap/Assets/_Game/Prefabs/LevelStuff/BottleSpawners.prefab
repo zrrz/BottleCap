@@ -407,7 +407,7 @@ Transform:
   - {fileID: 8341896465735944513}
   - {fileID: 8341896464208581376}
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1566254070923789545
 MonoBehaviour:
@@ -438,8 +438,8 @@ MonoBehaviour:
   - {fileID: 2346881359435016078}
   - {fileID: 8508743989183460484}
   - {fileID: 2187436780274655803}
-  minBottleSpawnFrequency: 4
-  maxBottleSpawnFrequency: 12
+  minBottleSpawnFrequency: 12
+  maxBottleSpawnFrequency: 24
 --- !u!1 &8341896464557135466
 GameObject:
   m_ObjectHideFlags: 0

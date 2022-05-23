@@ -50,7 +50,6 @@ public class ThrowingBottle : MonoBehaviour
     {
         if(other.gameObject.layer == LayerMask.NameToLayer("Water"))
         {
-            Debug.Log("trigger: " + other.gameObject);
             HandleTouchedWater();
         }
     }

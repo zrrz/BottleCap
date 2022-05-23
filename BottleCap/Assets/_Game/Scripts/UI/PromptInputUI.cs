@@ -78,7 +78,7 @@ public class PromptInputUI : GenericPageUI
             dateTime = System.DateTime.Now
         };
 
-        TutorialManager.Instance.TriggerEventCompleted(TutorialManager.TutorialSection.House);
+        TutorialManager.Instance.TriggerEventCompleted(TutorialManager.TutorialSection.HouseTwo);
 
         PlayerData.Instance.PlayerBottleHolder.SetHeldMessage(newAnswer);
         Close();

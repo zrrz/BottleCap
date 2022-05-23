@@ -72,6 +72,9 @@ public class PlayerPickup : MonoBehaviour
             case AnswerWritingTable table:
                 interactText = "To Write about yourself";
                 break;
+            case PetInteractable pet:
+                interactText = "To play with your dog";
+                break;
             default:
                 break;
         }

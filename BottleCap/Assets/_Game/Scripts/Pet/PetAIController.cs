@@ -12,16 +12,21 @@ public class PetAIController : MonoBehaviour
 
     public enum State
     {
-        Wander, Follow, Wait, CollectBottle
+        Wander, Follow, Wait, CollectBottle, Interact
     }
 
     [SerializeField] private State currentState;
 
-    private List<ThrowingBottle> bottlesToPickup = new List<ThrowingBottle>();
+    private List<ThrowingBottle> bottlesToPickup = new List<ThrowingBottle>(); 
+
     [SerializeField] private GameObject bottleVisual;
+
+    [SerializeField] private ParticleSystem loveVFX;
 
     void Start()
     {
+        animator.SetBool("Sitting", false);
+
         SetBottleVisuals(false);
 
         var petFollowState = new PetFollowState(agent, animator, this);
@@ -36,6 +41,9 @@ public class PetAIController : MonoBehaviour
 
         var petCollectBottleState = new PetCollectBottleState(bottlesToPickup, agent, animator, this);
         stateMap.Add(State.CollectBottle, petCollectBottleState);
+
+        var petInteractState = new PetInteractState(agent, animator, this);
+        stateMap.Add(State.Interact, petInteractState);
 
         SetState(State.Wander);
     }
@@ -57,7 +65,15 @@ public class PetAIController : MonoBehaviour
             return;
         }
         SetState(State.Follow);
-        //TODO whistle sound
+    }
+
+    public void InteractWithDog()
+    {
+        if (currentState == State.CollectBottle || currentState == State.Interact)
+        {
+            return;
+        }
+        SetState(State.Interact);
     }
 
     private void LateUpdate()
@@ -67,8 +83,12 @@ public class PetAIController : MonoBehaviour
 
     public void ChooseRandomState()
     {
-        var newState = (State)Random.Range(0, System.Enum.GetValues(typeof(State)).Length);
-        
+        State newState;
+        do
+        {
+            newState = (State)Random.Range(0, System.Enum.GetValues(typeof(State)).Length);
+        } while (newState == State.CollectBottle || newState == State.Interact);
+
         SetState(newState);
     }
 
@@ -111,5 +131,17 @@ public class PetAIController : MonoBehaviour
     public void SetBottleVisuals(bool active)
     {
         bottleVisual.SetActive(active);
+    }
+
+    public void SetLoveVFXActive(bool active)
+    {  
+        if(active)
+        {
+            loveVFX.Play();
+        }
+        else
+        {
+            loveVFX.Stop();
+        }
     }
 }

@@ -4,29 +4,53 @@ using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour
 {
-    [SerializeField] private Animator animator;
-    [SerializeField] private GameObject bottle;
+    public CharacterCostume[] characterCostumes;
+    private CharacterCostume currentCostume;
 
-    public Transform HoldingBottleTransform => bottle.transform;
+    private Animator Animator => currentCostume.animator;
+    private GameObject Bottle => currentCostume.bottle;
 
-    private void Start()
+    public Transform HoldingBottleTransform => Bottle.transform;
+
+    private void Awake()
     {
-        SetHoldingBottle(false);   
+        LoadCostume();
+        SetHoldingBottle(false);
+    }
+
+    private void LoadCostume()
+    {
+        int costumeIndex = UserManager.GetCostumeIndex();
+        currentCostume = characterCostumes[costumeIndex];
+        SetCostume(costumeIndex);
+    }
+
+    public void SetCostume(int index)
+    {
+        for(int i = 0; i < characterCostumes.Length; i++)
+        {
+            characterCostumes[i].gameObject.SetActive(i == index);
+        }
     }
 
     public void PlayPickup()
     {
-        animator.SetTrigger("PickupBottle");
+        Animator.SetTrigger("PickupBottle");
     }
 
     public void PlayThrow()
     {
-        animator.SetTrigger("ThrowBottle");
+        Animator.SetTrigger("ThrowBottle");
     }
 
     public void SetHoldingBottle(bool holding)
     {
-        bottle.SetActive(holding);
-        animator.SetLayerWeight(animator.GetLayerIndex("HoldBottleLayer"), holding ? 1f : 0f);
+        Bottle.SetActive(holding);
+        Animator.SetLayerWeight(Animator.GetLayerIndex("HoldBottleLayer"), holding ? 1f : 0f);
+    }
+
+    public void SetMoveSpeed(float speed)
+    {
+        Animator.SetFloat("MoveSpeed", speed);
     }
 }

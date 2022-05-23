@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class QuickCharacterController : MonoBehaviour
 {
-    [SerializeField] Animator animator;
+    //[SerializeField] Animator animator;
+    [SerializeField] private PlayerAnimator playerAnimator;
     [SerializeField] CharacterController characterController;
     [SerializeField] private float turnSpeed = 360f;
     [SerializeField] private float walkSpeed = 3f;
@@ -30,6 +31,6 @@ public class QuickCharacterController : MonoBehaviour
         }
 
         characterController.SimpleMove(inputSpeed * transform.forward * moveSpeed);
-        animator.SetFloat("MoveSpeed", inputSpeed * (sprinting ? 1f : .5f));
+        playerAnimator.SetMoveSpeed(inputSpeed * (sprinting ? 1f : .5f)); 
     }
 }

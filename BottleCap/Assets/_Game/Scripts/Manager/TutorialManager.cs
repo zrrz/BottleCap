@@ -17,8 +17,10 @@ public class TutorialManager : MonoBehaviour
         public UnityEvent OnCompleted;
 
         public bool shouldDoDialogue = false;
+        [TextArea]
         public string dialogueText = "";
         public bool shouldDoObjective = false;
+        [TextArea]
         public string objectiveText = "";
 
         public void TryComplete()
@@ -71,9 +73,11 @@ public class TutorialManager : MonoBehaviour
     public enum TutorialSection
     {
         House,
+        HouseTwo,
         GetToBeach,
         ThrowFirstBottle,
-        FindFirstBottle
+        FindFirstBottle,
+        FinishTutorial
     }
 
     public TutorialMoment[] moments;
@@ -108,7 +112,10 @@ public class TutorialManager : MonoBehaviour
 
     public void TriggerEventCompleted(TutorialSection section)
     {
-        momentMap[section].TryComplete();
+        if(currentSection == section)
+        {
+            momentMap[section].TryComplete();
+        }
     }
 
     public void TriggerMomentStart(TutorialSection section)

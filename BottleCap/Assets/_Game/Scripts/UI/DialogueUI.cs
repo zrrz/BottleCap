@@ -42,12 +42,14 @@ public class DialogueUI : MonoBehaviour
     }
 
     public static void CloseText()
-    {
+    {      
         PlayerData.ReleaseInputLock();
         instance.StartCoroutine(instance.AnimateScale(Vector3.one, Vector3.one * 0.01f, 0.5f, () =>
         {
             instance.gameObject.SetActive(false);
             TutorialManager.Instance.ShowObjectText();
+            TutorialManager.Instance.TriggerEventCompleted(TutorialManager.TutorialSection.FinishTutorial);
+            TutorialManager.Instance.TriggerEventCompleted(TutorialManager.TutorialSection.House);
         }
         ));
     }

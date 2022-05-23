@@ -241,7 +241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a4252b1c027f142bad34330f1a4859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endSection: 1
+  endSection: 2
 --- !u!1 &1933642751
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,7 +340,7 @@ Transform:
   - {fileID: 632410975}
   - {fileID: 1933642752}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6718824300300437234
 MonoBehaviour:
@@ -401,30 +401,6 @@ MonoBehaviour:
     OnCompleted:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1933642751}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-        - m_Target: {fileID: 0}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
         - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: PlayerBottleHolder, Assembly-CSharp
           m_MethodName: LockThrowing
@@ -440,9 +416,30 @@ MonoBehaviour:
     shouldDoDialogue: 1
     dialogueText: That was a nice sleep... I feel like writing a letter.
     shouldDoObjective: 1
-    objectiveText: Write a letter
+    objectiveText: 'Write a letter
+
+
+      WASD - Move
+
+      Shift - Run
+
+      F
+      - Interact'
   - section: 1
     nextSection: 2
+    manager: {fileID: 6718824300300437234}
+    OnStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    OnCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+    shouldDoDialogue: 1
+    dialogueText: '(Note: this letter goes out to REAL players, so be authentic!)'
+    shouldDoObjective: 0
+    objectiveText: 
+  - section: 2
+    nextSection: 3
     manager: {fileID: 6718824300300437234}
     OnStarted:
       m_PersistentCalls:
@@ -460,6 +457,30 @@ MonoBehaviour:
             m_BoolArgument: 0
           m_CallState: 2
         - m_Target: {fileID: 632410974}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+        - m_Target: {fileID: 1933642751}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_MethodName: SetActive
           m_Mode: 6
@@ -514,22 +535,43 @@ MonoBehaviour:
     dialogueText: I feel great! I hope my letter can help someone out there... Let's
       send it off!
     shouldDoObjective: 1
-    objectiveText: Get to the beach
-  - section: 2
-    nextSection: 3
+    objectiveText: 'Get to the beach
+
+
+      WASD - Move
+
+      Shift - Run'
+  - section: 3
+    nextSection: 4
     manager: {fileID: 6718824300300437234}
     OnStarted:
       m_PersistentCalls:
         m_Calls: []
     OnCompleted:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_MethodName: SetActive
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
     shouldDoDialogue: 1
-    dialogueText: Now I just press 'F' to toss the bottle into the ocean!
+    dialogueText: Now I just press 'F' to toss the bottle into the ocean! Try to
+      get it INTO the water!
     shouldDoObjective: 1
-    objectiveText: Throw your bottle!
-  - section: 3
-    nextSection: 3
+    objectiveText: 'Throw your bottle!
+
+
+      F - Interact'
+  - section: 4
+    nextSection: 5
     manager: {fileID: 6718824300300437234}
     OnStarted:
       m_PersistentCalls:
@@ -542,6 +584,20 @@ MonoBehaviour:
       around to see if anyone sent letters my way!
     shouldDoObjective: 1
     objectiveText: Find a letter in a bottle
+  - section: 5
+    nextSection: 5
+    manager: {fileID: 6718824300300437234}
+    OnStarted:
+      m_PersistentCalls:
+        m_Calls: []
+    OnCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+    shouldDoDialogue: 1
+    dialogueText: That's it for my daily routine. Now I can just explore the island
+      or write some more letters =)
+    shouldDoObjective: 0
+    objectiveText: 
 --- !u!114 &7302342399164126384
 MonoBehaviour:
   m_ObjectHideFlags: 0
