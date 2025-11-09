@@ -21,7 +21,13 @@ namespace BottleCapWebServer
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://localhost:5000", "http://*:5001");
+                    webBuilder.UseUrls("https://zachrock.com:5000",
+                        "http://zachrock.com:5020",
+                        "http://*:5030",
+                        "https://*:5040"
+                        //"http://18.223.69.65:5040",
+                        //"http://18.223.69.65:5001"
+                        );
                 });
     }
 }
